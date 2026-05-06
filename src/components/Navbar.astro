@@ -1,48 +1,66 @@
 ---
+import type { NavT, Lang } from '../i18n/types'
+
+interface Props {
+  t:       NavT
+  lang:    Lang
+  altHref: string
+}
+const { t, lang, altHref } = Astro.props
+
 const links = [
-  { label: "About",    href: "#about"    },
-  { label: "Skills",   href: "#skills"   },
-  { label: "Progetti", href: "#projects" },
-  { label: "Contatti", href: "#contact"  },
+  { label: t.about,    href: '#about'    },
+  { label: t.skills,   href: '#skills'   },
+  { label: t.projects, href: '#projects' },
+  { label: t.contact,  href: '#contact'  },
 ]
+const altLabel = lang === 'en' ? 'IT' : 'EN'
 ---
 
 <header class="fixed top-[2px] inset-x-0 z-50 bg-zinc-950/80 backdrop-blur border-b border-zinc-800/60">
   <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
 
     <!-- Logo -->
-    <a href="/" class="font-mono font-bold text-lg tracking-tight text-white flex items-center gap-1">
+    <a href={lang === 'en' ? '/' : '/it'} class="font-mono font-bold text-lg tracking-tight text-white flex items-center gap-1">
       <span class="text-cyan-400 neon-text">&gt;</span>
       <span>VP</span>
       <span class="text-cyan-400 cursor-blink"></span>
     </a>
 
-    <!-- Desktop links -->
-    <ul class="hidden md:flex gap-8 font-mono text-sm text-zinc-400">
-      {links.map(({ label, href }) => (
-        <li>
-          <a
-            href={href}
-            class="relative hover:text-cyan-400 transition-colors duration-200 group"
-          >
-            {label}
-            <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div class="flex items-center gap-6">
+      <!-- Desktop links -->
+      <ul class="hidden md:flex gap-8 font-mono text-sm text-zinc-400">
+        {links.map(({ label, href }) => (
+          <li>
+            <a href={href} class="relative hover:text-cyan-400 transition-colors duration-200 group">
+              {label}
+              <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+            </a>
+          </li>
+        ))}
+      </ul>
 
-    <!-- Hamburger (mobile) -->
-    <button
-      id="menu-btn"
-      aria-label="Apri menu"
-      aria-expanded="false"
-      class="md:hidden flex flex-col gap-[5px] p-2 group"
-    >
-      <span id="bar-1" class="block w-6 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400"></span>
-      <span id="bar-2" class="block w-6 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400"></span>
-      <span id="bar-3" class="block w-4 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400 group-hover:w-6"></span>
-    </button>
+      <!-- Lang switcher -->
+      <a
+        href={altHref}
+        class="font-mono text-xs border border-zinc-700 hover:border-cyan-400/60 text-zinc-400 hover:text-cyan-400 px-2.5 py-1 rounded transition-all duration-200"
+        aria-label={`Switch to ${altLabel}`}
+      >
+        {altLabel}
+      </a>
+
+      <!-- Hamburger (mobile) -->
+      <button
+        id="menu-btn"
+        aria-label="Apri menu"
+        aria-expanded="false"
+        class="md:hidden flex flex-col gap-[5px] p-2 group"
+      >
+        <span id="bar-1" class="block w-6 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400"></span>
+        <span id="bar-2" class="block w-6 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400"></span>
+        <span id="bar-3" class="block w-4 h-[2px] bg-zinc-400 transition-all duration-300 group-hover:bg-cyan-400 group-hover:w-6"></span>
+      </button>
+    </div>
   </nav>
 </header>
 
@@ -54,33 +72,36 @@ const links = [
   <ul class="font-mono text-2xl text-zinc-300 flex flex-col items-center gap-8">
     {links.map(({ label, href }) => (
       <li>
-        <a
-          href={href}
-          class="drawer-link hover:text-cyan-400 transition-colors flex items-center gap-2"
-        >
+        <a href={href} class="drawer-link hover:text-cyan-400 transition-colors flex items-center gap-2">
           <span class="text-cyan-400 text-sm">//</span>
           {label}
         </a>
       </li>
     ))}
   </ul>
+  <!-- Lang switcher in drawer -->
+  <a
+    href={altHref}
+    class="font-mono text-sm border border-zinc-700 hover:border-cyan-400/60 text-zinc-400 hover:text-cyan-400 px-4 py-2 rounded transition-all duration-200"
+  >
+    {altLabel}
+  </a>
 </div>
 
 <script>
-  const btn     = document.getElementById('menu-btn')!
-  const drawer  = document.getElementById('mobile-drawer')!
-  const bar1    = document.getElementById('bar-1')!
-  const bar2    = document.getElementById('bar-2')!
-  const bar3    = document.getElementById('bar-3')!
+  const btn    = document.getElementById('menu-btn')!
+  const drawer = document.getElementById('mobile-drawer')!
+  const bar1   = document.getElementById('bar-1')!
+  const bar2   = document.getElementById('bar-2')!
+  const bar3   = document.getElementById('bar-3')!
 
   function open() {
     drawer.classList.replace('translate-x-full', 'translate-x-0')
     btn.setAttribute('aria-expanded', 'true')
-    bar1.style.cssText = 'transform: translateY(7px) rotate(45deg); background:#00e5ff'
-    bar2.style.cssText = 'opacity: 0'
-    bar3.style.cssText = 'transform: translateY(-7px) rotate(-45deg); width:24px; background:#00e5ff'
+    bar1.style.cssText = 'transform:translateY(7px) rotate(45deg);background:#00e5ff'
+    bar2.style.cssText = 'opacity:0'
+    bar3.style.cssText = 'transform:translateY(-7px) rotate(-45deg);width:24px;background:#00e5ff'
   }
-
   function close() {
     drawer.classList.replace('translate-x-0', 'translate-x-full')
     btn.setAttribute('aria-expanded', 'false')
@@ -89,11 +110,8 @@ const links = [
     bar3.style.cssText = ''
   }
 
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', () =>
     btn.getAttribute('aria-expanded') === 'true' ? close() : open()
-  })
-
-  document.querySelectorAll('.drawer-link').forEach((link) => {
-    link.addEventListener('click', close)
-  })
+  )
+  document.querySelectorAll('.drawer-link').forEach((l) => l.addEventListener('click', close))
 </script>

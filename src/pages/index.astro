@@ -1,23 +1,26 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Skills from "../components/Skills.astro";
-import Projects from "../components/Projects.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import Layout from '../layouts/Layout.astro'
+import Navbar from '../components/Navbar.astro'
+import Hero from '../components/Hero.astro'
+import About from '../components/About.astro'
+import Skills from '../components/Skills.astro'
+import Projects from '../components/Projects.astro'
+import Contact from '../components/Contact.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+import { en } from '../i18n/en'
+
+const t = en
 ---
 
-<Layout>
-  <Navbar />
+<Layout title="Valerio Pinsone — Portfolio" lang="en">
+  <Navbar t={t.nav} lang="en" altHref="/it" />
   <main>
-    <Hero />
-    <About />
-    <Skills />
-    <Projects />
-    <Contact />
+    <Hero    t={t.hero}     />
+    <About   t={t.about}    />
+    <Skills  t={t.skills}   />
+    <Projects t={t.projects} />
+    <Contact  t={t.contact}  />
   </main>
-  <Footer />
+  <Footer t={t.footer} />
 </Layout>

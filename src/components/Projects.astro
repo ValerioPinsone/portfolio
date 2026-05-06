@@ -1,12 +1,16 @@
 ---
+import type { ProjectsT } from '../i18n/types'
 import ProjectsGrid from './ProjectsGrid.tsx'
+
+interface Props { t: ProjectsT }
+const { t } = Astro.props
 ---
 
 <section id="projects" class="py-24 px-6 max-w-5xl mx-auto">
   <div class="flex items-center gap-4 mb-12" data-reveal>
-    <span class="font-mono text-cyan-400 text-sm opacity-60">03.</span>
-    <h2 class="text-3xl font-bold">Progetti</h2>
+    <span class="font-mono text-cyan-400 text-sm opacity-60">{t.sectionNum}</span>
+    <h2 class="text-3xl font-bold">{t.title}</h2>
     <div class="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/40 to-transparent"></div>
   </div>
-  <ProjectsGrid client:visible />
+  <ProjectsGrid client:load projects={t.items} />
 </section>

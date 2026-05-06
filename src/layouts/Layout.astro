@@ -1,12 +1,15 @@
 ---
+import type { Lang } from '../i18n/types'
+
 interface Props {
-  title?: string;
+  title?: string
+  lang?: Lang
 }
-const { title = "Valerio Pinsone — Portfolio" } = Astro.props;
+const { title = 'Valerio Pinsone — Portfolio', lang = 'en' } = Astro.props
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,12 +37,7 @@ const { title = "Valerio Pinsone — Portfolio" } = Astro.props;
 </html>
 
 <style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    scroll-behavior: smooth;
-  }
+  html, body { margin: 0; width: 100%; scroll-behavior: smooth; }
 </style>
 
 <script>
@@ -48,73 +46,47 @@ const { title = "Valerio Pinsone — Portfolio" } = Astro.props;
 
   gsap.registerPlugin(ScrollTrigger)
 
-  /* ── Scroll progress bar ─────────────────────────── */
   gsap.to('#scroll-progress', {
     scaleX: 1,
     ease: 'none',
     scrollTrigger: { start: 0, end: 'max', scrub: true },
   })
 
-  /* ── Section reveals ─────────────────────────────── */
   gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
-    gsap.fromTo(
-      el,
+    gsap.fromTo(el,
       { opacity: 0, y: 48 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      }
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true } }
     )
   })
 
-  /* ── Stagger reveal for list children ────────────── */
   gsap.utils.toArray<HTMLElement>('[data-stagger]').forEach((parent) => {
-    const children = Array.from(parent.children)
-    gsap.fromTo(
-      children,
+    gsap.fromTo(Array.from(parent.children),
       { opacity: 0, y: 32 },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: parent, start: 'top 85%', once: true },
-      }
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: parent, start: 'top 85%', once: true } }
     )
   })
 
-  /* ── Parallax layers ─────────────────────────────── */
   gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
     const yPercent = el.dataset.parallax === 'slow' ? 25 : -25
     gsap.to(el, {
-      yPercent,
-      ease: 'none',
+      yPercent, ease: 'none',
       scrollTrigger: {
         trigger: el.closest('section') ?? el,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
+        start: 'top bottom', end: 'bottom top', scrub: true,
       },
     })
   })
 
-  /* ── Count-up numbers ────────────────────────────── */
   gsap.utils.toArray<HTMLElement>('[data-count]').forEach((el) => {
     const target = parseInt(el.dataset.count ?? '0')
     const suffix = el.dataset.suffix ?? ''
     ScrollTrigger.create({
-      trigger: el,
-      start: 'top 88%',
-      once: true,
+      trigger: el, start: 'top 88%', once: true,
       onEnter: () => {
         gsap.to({ val: 0 }, {
-          val: target,
-          duration: 1.6,
-          ease: 'power2.out',
+          val: target, duration: 1.6, ease: 'power2.out',
           onUpdate(this: gsap.core.Tween) {
             el.textContent = Math.round((this.targets()[0] as { val: number }).val) + suffix
           },

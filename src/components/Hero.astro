@@ -1,50 +1,47 @@
 ---
+import type { HeroT } from '../i18n/types'
 import HeroScene from './HeroScene.tsx'
+
+interface Props { t: HeroT }
+const { t } = Astro.props
 ---
 
 <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-16 overflow-hidden">
   <HeroScene client:load />
 
   <div class="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
-    <!-- Terminal label -->
     <p class="font-mono text-xs sm:text-sm text-cyan-400 mb-5 flex items-center gap-2">
       <span class="opacity-60">//</span>
-      Frontend Developer
+      {t.label}
       <span class="opacity-60">//</span>
     </p>
 
-    <!-- Headline -->
     <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight drop-shadow-lg">
-      Ciao, sono{' '}
-      <span
-        class="glitch text-cyan-400 neon-text"
-        data-text="Valerio"
-      >Valerio</span>
+      {t.greeting}{' '}
+      <span class="glitch text-cyan-400 neon-text" data-text="Valerio">Valerio</span>
     </h1>
 
     <p class="max-w-lg mt-6 text-zinc-400 text-base sm:text-lg leading-relaxed">
-      Costruisco interfacce moderne e performanti con Angular, React e Astro.
+      {t.sub}
     </p>
 
-    <!-- CTA -->
     <div class="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
       <a
         href="#projects"
         class="px-7 py-3 rounded border border-cyan-400 text-cyan-400 font-mono text-sm hover:bg-cyan-400/10 transition-all duration-300 neon-border-cyan"
       >
-        [ Vedi i progetti ]
+        {t.cta_projects}
       </a>
       <a
         href="#contact"
         class="px-7 py-3 rounded border border-zinc-700 text-zinc-400 font-mono text-sm hover:border-purple-500 hover:text-purple-400 transition-all duration-300"
       >
-        [ Contattami ]
+        {t.cta_contact}
       </a>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="mt-16 flex flex-col items-center gap-2 opacity-40">
-      <span class="font-mono text-xs text-zinc-500 tracking-widest">SCROLL</span>
+      <span class="font-mono text-xs text-zinc-500 tracking-widest">{t.scroll}</span>
       <div class="w-[1px] h-10 bg-gradient-to-b from-cyan-400 to-transparent"></div>
     </div>
   </div>

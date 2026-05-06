@@ -1,14 +1,57 @@
 ---
+import type { SkillsT } from '../i18n/types'
 import SkillsGrid from './SkillsGrid.tsx'
+
+interface Props { t: SkillsT }
+const { t } = Astro.props
+
+const categories = [
+  {
+    category: t.categories.framework,
+    accent: '#00e5ff',
+    items: [
+      { name: 'Angular',    level: 85 },
+      { name: 'React',      level: 80 },
+      { name: 'Astro',      level: 70 },
+    ],
+  },
+  {
+    category: t.categories.languages,
+    accent: '#a855f7',
+    items: [
+      { name: 'TypeScript', level: 88 },
+      { name: 'JavaScript', level: 90 },
+      { name: 'HTML / CSS', level: 95 },
+    ],
+  },
+  {
+    category: t.categories.styling,
+    accent: '#00e5ff',
+    items: [
+      { name: 'Tailwind CSS',      level: 90 },
+      { name: 'SCSS',              level: 78 },
+      { name: 'Angular Material',  level: 82 },
+    ],
+  },
+  {
+    category: t.categories.tools,
+    accent: '#a855f7',
+    items: [
+      { name: 'Git',     level: 85 },
+      { name: 'Vite',    level: 80 },
+      { name: 'GraphQL', level: 70 },
+    ],
+  },
+]
 ---
 
 <section id="skills" class="py-24 px-6 cyber-grid-bg">
   <div class="max-w-5xl mx-auto">
     <div class="flex items-center gap-4 mb-12" data-reveal>
-      <span class="font-mono text-cyan-400 text-sm opacity-60">02.</span>
-      <h2 class="text-3xl font-bold">Skills</h2>
+      <span class="font-mono text-cyan-400 text-sm opacity-60">{t.sectionNum}</span>
+      <h2 class="text-3xl font-bold">{t.title}</h2>
       <div class="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/40 to-transparent"></div>
     </div>
-    <SkillsGrid client:visible />
+    <SkillsGrid client:load categories={categories} />
   </div>
 </section>

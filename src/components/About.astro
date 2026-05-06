@@ -1,11 +1,15 @@
 ---
+import type { AboutT } from '../i18n/types'
+
+interface Props { t: AboutT }
+const { t } = Astro.props
+const { stats, profile } = t
 ---
 
 <section id="about" class="py-24 px-6 max-w-5xl mx-auto overflow-hidden">
-  <!-- Section header -->
   <div class="flex items-center gap-4 mb-12" data-reveal>
-    <span class="font-mono text-cyan-400 text-sm opacity-60">01.</span>
-    <h2 class="text-3xl font-bold">Chi sono</h2>
+    <span class="font-mono text-cyan-400 text-sm opacity-60">{t.sectionNum}</span>
+    <h2 class="text-3xl font-bold">{t.title}</h2>
     <div class="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/40 to-transparent"></div>
   </div>
 
@@ -13,86 +17,73 @@
     <!-- Left: text + stats -->
     <div data-parallax="slow">
       <div class="space-y-4 text-zinc-400 leading-relaxed mb-10">
-        <p>
-          Sono un <span class="text-white">Frontend Developer</span> con la passione per le
-          interfacce curate e il codice pulito. Lavoro principalmente con Angular, React e Astro.
-        </p>
-        <p>
-          Mi piace costruire esperienze web veloci, accessibili e piacevoli da usare,
-          prestando attenzione ai dettagli sia a livello visivo che di performance.
-        </p>
-        <p>
-          Quando non scrivo codice, esploro nuovi strumenti, design system e tutto ciò che
-          riguarda il mondo del web moderno.
-        </p>
+        <p>{t.p1}</p>
+        <p>{t.p2}</p>
+        <p>{t.p3}</p>
       </div>
 
-      <!-- Stats -->
       <div class="grid grid-cols-3 gap-4 pt-8 border-t border-zinc-800">
         <div>
           <div
             class="text-3xl font-bold text-cyan-400 neon-text font-mono"
-            data-count="7"
-            data-suffix="+"
-          >0+</div>
-          <div class="text-xs text-zinc-500 mt-1 font-mono">Anni exp.</div>
+            data-count={stats.years.count}
+            data-suffix={stats.years.suffix}
+          >0{stats.years.suffix}</div>
+          <div class="text-xs text-zinc-500 mt-1 font-mono">{stats.years.label}</div>
         </div>
         <div>
           <div
             class="text-3xl font-bold text-cyan-400 neon-text font-mono"
-            data-count="10"
-            data-suffix="+"
-          >0+</div>
-          <div class="text-xs text-zinc-500 mt-1 font-mono">Progetti</div>
+            data-count={stats.projects.count}
+            data-suffix={stats.projects.suffix}
+          >0{stats.projects.suffix}</div>
+          <div class="text-xs text-zinc-500 mt-1 font-mono">{stats.projects.label}</div>
         </div>
         <div>
           <div
             class="text-3xl font-bold text-cyan-400 neon-text font-mono"
-            data-count="5"
+            data-count={stats.stack.count}
           >0</div>
-          <div class="text-xs text-zinc-500 mt-1 font-mono">Tech stack</div>
+          <div class="text-xs text-zinc-500 mt-1 font-mono">{stats.stack.label}</div>
         </div>
       </div>
     </div>
 
-    <!-- Right: info card -->
+    <!-- Right: JSON card -->
     <div
       class="border border-zinc-800 rounded bg-zinc-900/60 backdrop-blur overflow-hidden"
       data-parallax="fast"
     >
-      <!-- Card header bar -->
       <div class="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900">
         <span class="w-2.5 h-2.5 rounded-full bg-red-500/70"></span>
         <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></span>
         <span class="w-2.5 h-2.5 rounded-full bg-green-500/70"></span>
-        <span class="font-mono text-xs text-zinc-500 ml-2">profile.json</span>
+        <span class="font-mono text-xs text-zinc-500 ml-2">{profile.filename}</span>
       </div>
 
       <div class="p-6 font-mono text-sm space-y-3">
-        <div class="flex gap-3">
-          <span class="text-purple-400">posizione</span>
+        <div class="flex gap-3 flex-wrap">
+          <span class="text-purple-400">{profile.locationLabel}</span>
           <span class="text-zinc-600">:</span>
-          <span class="text-cyan-300">"Italia"</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="text-purple-400">disponibilità</span>
-          <span class="text-zinc-600">:</span>
-          <span class="text-green-400">"open to work"</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="text-purple-400">focus</span>
-          <span class="text-zinc-600">:</span>
-          <span class="text-cyan-300">"Frontend / UI"</span>
+          <span class="text-cyan-300">{profile.locationValue}</span>
         </div>
         <div class="flex gap-3 flex-wrap">
-          <span class="text-purple-400">email</span>
+          <span class="text-purple-400">{profile.availLabel}</span>
+          <span class="text-zinc-600">:</span>
+          <span class="text-green-400">{profile.availValue}</span>
+        </div>
+        <div class="flex gap-3 flex-wrap">
+          <span class="text-purple-400">{profile.focusLabel}</span>
+          <span class="text-zinc-600">:</span>
+          <span class="text-cyan-300">{profile.focusValue}</span>
+        </div>
+        <div class="flex gap-3 flex-wrap">
+          <span class="text-purple-400">{profile.emailLabel}</span>
           <span class="text-zinc-600">:</span>
           <a
             href="mailto:valerio.pinsone@gmail.com"
             class="text-cyan-400 hover:text-cyan-300 transition-colors break-all"
-          >
-            "valerio.pinsone@gmail.com"
-          </a>
+          >"valerio.pinsone@gmail.com"</a>
         </div>
       </div>
     </div>
