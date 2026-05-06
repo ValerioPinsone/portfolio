@@ -68,14 +68,18 @@ const { title = 'Valerio Pinsone — Portfolio', lang = 'en' } = Astro.props
     )
   })
 
-  gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
-    const yPercent = el.dataset.parallax === 'slow' ? 25 : -25
-    gsap.to(el, {
-      yPercent, ease: 'none',
-      scrollTrigger: {
-        trigger: el.closest('section') ?? el,
-        start: 'top bottom', end: 'bottom top', scrub: true,
-      },
+  // Parallax solo su desktop (md+): su mobile gli elementi sono in colonna
+  // e il movimento li farebbe sovrapporre
+  gsap.matchMedia().add('(min-width: 768px)', () => {
+    gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
+      const yPercent = el.dataset.parallax === 'slow' ? 25 : -25
+      gsap.to(el, {
+        yPercent, ease: 'none',
+        scrollTrigger: {
+          trigger: el.closest('section') ?? el,
+          start: 'top bottom', end: 'bottom top', scrub: true,
+        },
+      })
     })
   })
 
