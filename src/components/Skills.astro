@@ -1,0 +1,14 @@
+---
+import SkillsGrid from './SkillsGrid.tsx'
+---
+
+<section id="skills" class="py-24 px-6 cyber-grid-bg">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex items-center gap-4 mb-12" data-reveal>
+      <span class="font-mono text-cyan-400 text-sm opacity-60">02.</span>
+      <h2 class="text-3xl font-bold">Skills</h2>
+      <div class="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/40 to-transparent"></div>
+    </div>
+    <SkillsGrid client:visible />
+  </div>
+</section>
