@@ -1,12 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- background -->
-  <rect width="32" height="32" rx="4" fill="#09090b"/>
-  <!-- neon border -->
-  <rect x="0.5" y="0.5" width="31" height="31" rx="3.5" fill="none" stroke="#00e5ff" stroke-width="0.75" stroke-opacity="0.35"/>
-  <!-- > prompt in cyan -->
-  <text x="3" y="13" font-family="'Courier New',monospace" font-size="9" font-weight="700" fill="#00e5ff">&gt;</text>
-  <!-- VP in white -->
-  <text x="3" y="27" font-family="'Courier New',monospace" font-size="15" font-weight="700" fill="#f4f4f5">VP</text>
-  <!-- cyan underline accent -->
-  <rect x="3" y="29" width="14" height="1.5" rx="0.75" fill="#00e5ff" opacity="0.6"/>
+  <defs>
+
+    <!-- gradient shared by border and text -->
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- subtle radial spotlight on bg -->
+    <radialGradient id="spot" cx="50%" cy="56%" r="46%">
+      <stop offset="0%"   stop-color="#00e5ff" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- multi-layer neon glow -->
+    <filter id="neon" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"   result="wide"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="tight"/>
+      <feMerge>
+        <feMergeNode in="wide"/>
+        <feMergeNode in="tight"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+
+  <!-- gradient border: full rect with gradient, then dark inset -->
+  <rect width="32" height="32" rx="6"   fill="url(#grad)"/>
+  <rect x="1.5" y="1.5" width="29" height="29" rx="4.5" fill="#09090b"/>
+  <rect x="1.5" y="1.5" width="29" height="29" rx="4.5" fill="url(#spot)"/>
+
+  <!-- VP monogram -->
+  <text
+    x="16" y="22"
+    text-anchor="middle"
+    font-family="'Arial Black','Helvetica Neue',Arial,sans-serif"
+    font-size="19"
+    font-weight="900"
+    fill="url(#grad)"
+    filter="url(#neon)"
+  >VP</text>
+
 </svg>
