@@ -68,6 +68,18 @@ const jsonLd = JSON.stringify({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Auto-redirect to /it if browser language is Italian (unless user manually switched) -->
+    <script is:inline>
+      try {
+        if (!sessionStorage.getItem('vp-lang-manual')) {
+          if ((navigator.language || '').toLowerCase().startsWith('it') &&
+              (location.pathname === '/' || location.pathname === '')) {
+            location.replace('/it');
+          }
+        }
+      } catch(e) {}
+    </script>
+
     <!-- Primary SEO -->
     <title>{resolvedTitle}</title>
     <meta name="description" content={resolvedDesc} />

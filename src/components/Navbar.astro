@@ -44,6 +44,7 @@ const altLabel = lang === 'en' ? 'IT' : 'EN'
       <!-- Lang switcher -->
       <a
         href={altHref}
+        data-lang-switch
         class="font-mono text-xs border border-zinc-700 hover:border-cyan-400/60 text-zinc-400 hover:text-cyan-400 px-2.5 py-1 rounded transition-all duration-200"
         aria-label={`Switch to ${altLabel}`}
       >
@@ -83,6 +84,7 @@ const altLabel = lang === 'en' ? 'IT' : 'EN'
   <!-- Lang switcher in drawer -->
   <a
     href={altHref}
+    data-lang-switch
     class="font-mono text-sm border border-zinc-700 hover:border-cyan-400/60 text-zinc-400 hover:text-cyan-400 px-4 py-2 rounded transition-all duration-200"
   >
     {altLabel}
@@ -115,4 +117,10 @@ const altLabel = lang === 'en' ? 'IT' : 'EN'
     btn.getAttribute('aria-expanded') === 'true' ? close() : open()
   )
   document.querySelectorAll('.drawer-link').forEach((l) => l.addEventListener('click', close))
+
+  document.querySelectorAll('[data-lang-switch]').forEach((l) =>
+    l.addEventListener('click', () => {
+      try { sessionStorage.setItem('vp-lang-manual', '1') } catch(e) {}
+    })
+  )
 </script>
