@@ -145,7 +145,7 @@ export const it: T = {
     title:    'Contatti',
     filename: 'contact.sh',
     whoami:   'Valerio Pinsone — Frontend Developer',
-    line1:    'Hai un progetto in mente o vuoi semplicemente dire ciao?',
+    line1:    'Hai un progetto in mente o vuoi semplicemente fare due chiacchiere?',
     line2:    'Scrivimi.',
     github:   'github',
     linkedin: 'linkedin',
