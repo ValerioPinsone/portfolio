@@ -139,6 +139,38 @@ const jsonLd = JSON.stringify({
   </body>
 </html>
 
+<script is:inline define:vars={{ lang }}>
+(function () {
+  var c = '#00e5ff', p = '#a855f7', g = '#a1a1aa'
+  var it = lang === 'it'
+
+  console.log(
+    '%c██╗   ██╗██████╗ \n██║   ██║██╔══██╗\n██║   ██║██████╔╝\n╚██╗ ██╔╝██╔═══╝ \n ╚████╔╝ ██║     \n  ╚═══╝  ╚═╝     ',
+    'color:' + c + ';font-family:monospace;font-size:13px;line-height:1.5'
+  )
+
+  console.log(
+    '%c ' + (it
+      ? '👾 Ehi! Stai curiosando nel codice? Rispetto. '
+      : '👾 Hey! Snooping through the code? Respect. '),
+    'background:' + p + ';color:#fff;font-size:13px;font-family:monospace;font-weight:bold;padding:5px 12px;border-radius:4px'
+  )
+
+  console.log(
+    '%c\n' + (it
+      ? 'Da sviluppatore a sviluppatore — benvenuto dietro le quinte.\n\nSono Valerio, il dev che ha costruito questo sito.\nSe sei arrivato fin qui, probabilmente parliamo la stessa lingua. 🤙\n\nFammi sapere:'
+      : 'From one dev to another — welcome behind the curtain.\n\nI\'m Valerio, the dev who built this site.\nIf you made it here, we probably speak the same language. 🤙\n\nLet\'s connect:')
+    + '\n\n  ✉  valerio.pinsone@gmail.com\n  🐙  github.com/ValerioPinsone\n  💼  linkedin.com/in/valeriopinsone\n',
+    'color:' + g + ';font-family:monospace;font-size:12px;line-height:1.9'
+  )
+
+  console.log(
+    '%c// built with Astro, React & Three.js',
+    'color:' + c + ';font-family:monospace;font-size:11px;opacity:0.6'
+  )
+}())
+</script>
+
 <style>
   html, body { margin: 0; width: 100%; scroll-behavior: smooth; }
 </style>
