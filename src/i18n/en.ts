@@ -96,7 +96,7 @@ export const en: T = {
         to:          'Aug 2021',
         current:     false,
         description: 'Development of PL-SQL stored procedures on Oracle and T-SQL Microsoft technologies.',
-        tags:        ['Oracle', 'SQL', 'PL-SQL', 'T-SQL'],
+        tags:        ['Oracle', 'SQL', 'PL-SQL', 'T-SQL', 'Git'],
         accent:      '#a855f7',
       },
       {

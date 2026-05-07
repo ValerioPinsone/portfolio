@@ -66,7 +66,7 @@ export const it: T = {
         to:          'Presente',
         current:     true,
         description: 'Sviluppo Frontend in ambito bancario per Banca D\'Italia, Intesa SanPaolo e BPER Banca.',
-        tags:        ['Angular', 'TypeScript', 'Banking'],
+        tags:        ['Angular', 'React', 'TypeScript', 'JWT', 'Banking'],
         accent:      '#00e5ff',
       },
       {
@@ -96,7 +96,7 @@ export const it: T = {
         to:          'Ago 2021',
         current:     false,
         description: 'Sviluppo procedure PL-SQL su tecnologia Oracle / T-SQL Microsoft.',
-        tags:        ['Oracle', 'PL-SQL', 'T-SQL'],
+        tags:        ['Oracle', 'SQL', 'PL-SQL', 'T-SQL', 'Git'],
         accent:      '#a855f7',
       },
       {
@@ -106,7 +106,7 @@ export const it: T = {
         to:          'Apr 2021',
         current:     false,
         description: 'Programmazione PLC e sistemi di supervisione su tecnologie SAIA-Burgess / Movicon.',
-        tags:        ['PLC', 'SAIA-Burgess', 'Movicon'],
+        tags:        ['PLC', 'SAIA-Burgess', 'Movicon', 'Assembly'],
         accent:      '#00e5ff',
       },
     ],
