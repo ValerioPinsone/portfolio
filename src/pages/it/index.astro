@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar.astro'
 import Hero from '../../components/Hero.astro'
 import About from '../../components/About.astro'
 import Skills from '../../components/Skills.astro'
+import Experience from '../../components/Experience.astro'
 import Projects from '../../components/Projects.astro'
 import Contact from '../../components/Contact.astro'
 import Footer from '../../components/Footer.astro'
@@ -18,8 +19,9 @@ const t = it
   <main>
     <Hero     t={t.hero}     />
     <About    t={t.about}    />
-    <Skills   t={t.skills}   />
-    <Projects t={t.projects} />
+    <Skills     t={t.skills}     />
+    <Experience t={t.experience} />
+    <Projects   t={t.projects}   />
     <Contact  t={t.contact}  />
   </main>
   <Footer t={t.footer} />

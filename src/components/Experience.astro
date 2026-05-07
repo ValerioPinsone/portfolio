@@ -1,0 +1,18 @@
+---
+import type { ExperienceT } from '../i18n/types'
+import ExperienceTimeline from './ExperienceTimeline.tsx'
+
+interface Props { t: ExperienceT }
+const { t } = Astro.props
+---
+
+<section id="experience" class="py-24 px-6 cyber-grid-bg">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex items-center gap-4 mb-12" data-reveal>
+      <span class="font-mono text-cyan-400 text-sm opacity-60">{t.sectionNum}</span>
+      <h2 class="text-3xl font-bold">{t.title}</h2>
+      <div class="flex-1 h-[1px] bg-gradient-to-r from-cyan-400/40 to-transparent"></div>
+    </div>
+    <ExperienceTimeline client:load items={t.items} present={t.present} />
+  </div>
+</section>

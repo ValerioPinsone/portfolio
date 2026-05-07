@@ -4,10 +4,11 @@ export const it: T = {
   lang: 'it',
 
   nav: {
-    about:    'About',
-    skills:   'Skills',
-    projects: 'Progetti',
-    contact:  'Contatti',
+    about:      'About',
+    skills:     'Skills',
+    experience: 'Esperienza',
+    projects:   'Progetti',
+    contact:    'Contatti',
   },
 
   hero: {
@@ -53,8 +54,66 @@ export const it: T = {
     },
   },
 
-  projects: {
+  experience: {
     sectionNum: '03.',
+    title:      'Esperienza',
+    present:    'Presente',
+    items: [
+      {
+        company:     'ReActive | Gruppo AlmavivA',
+        role:        'Frontend Developer',
+        from:        'Dic 2023',
+        to:          'Presente',
+        current:     true,
+        description: 'Sviluppo Frontend in ambito bancario per Banca D\'Italia, Intesa SanPaolo e BPER Banca.',
+        tags:        ['Angular', 'TypeScript', 'Banking'],
+        accent:      '#00e5ff',
+      },
+      {
+        company:     'Gruppo ISEI srl',
+        role:        'Frontend Developer',
+        from:        'Gen 2022',
+        to:          'Dic 2023',
+        current:     false,
+        description: 'Sviluppo software su stack Angular / Spring Boot. Progetti per pubblica amministrazione e ambito bancario (architettura DARWIN). Prototipazione UI/UX con Figma e sviluppo Next.js.',
+        tags:        ['Angular', 'Next.js', 'Spring Boot', 'Figma'],
+        accent:      '#a855f7',
+      },
+      {
+        company:     'Accademia Italiana Fitness',
+        role:        'Full Stack Developer / Analyst',
+        from:        'Dic 2021',
+        to:          'Gen 2022',
+        current:     false,
+        description: 'Gestione e sviluppo gestionale interno e applicazione clienti.',
+        tags:        ['PHP', 'MySQL', 'JavaScript'],
+        accent:      '#00e5ff',
+      },
+      {
+        company:     'F-Informatica',
+        role:        'Back-end Developer',
+        from:        'Apr 2021',
+        to:          'Ago 2021',
+        current:     false,
+        description: 'Sviluppo procedure PL-SQL su tecnologia Oracle / T-SQL Microsoft.',
+        tags:        ['Oracle', 'PL-SQL', 'T-SQL'],
+        accent:      '#a855f7',
+      },
+      {
+        company:     'Progei Srl',
+        role:        'Programmatore PLC',
+        from:        'Set 2017',
+        to:          'Apr 2021',
+        current:     false,
+        description: 'Programmazione PLC e sistemi di supervisione su tecnologie SAIA-Burgess / Movicon.',
+        tags:        ['PLC', 'SAIA-Burgess', 'Movicon'],
+        accent:      '#00e5ff',
+      },
+    ],
+  },
+
+  projects: {
+    sectionNum: '04.',
     title: 'Progetti',
     items: [
       {
@@ -82,7 +141,7 @@ export const it: T = {
   },
 
   contact: {
-    sectionNum: '04.',
+    sectionNum: '05.',
     title:    'Contatti',
     filename: 'contact.sh',
     whoami:   'Valerio Pinsone — Frontend Developer',

@@ -1,10 +1,11 @@
 export type Lang = 'en' | 'it'
 
 export interface NavT {
-  about: string
-  skills: string
-  projects: string
-  contact: string
+  about:      string
+  skills:     string
+  experience: string
+  projects:   string
+  contact:    string
 }
 
 export interface HeroT {
@@ -75,17 +76,36 @@ export interface ContactT {
   linkedin:   string
 }
 
+export interface ExperienceItem {
+  company:     string
+  role:        string
+  from:        string
+  to:          string
+  current:     boolean
+  description: string
+  tags:        string[]
+  accent:      string
+}
+
+export interface ExperienceT {
+  sectionNum: string
+  title:      string
+  present:    string
+  items:      ExperienceItem[]
+}
+
 export interface FooterT {
   built: string
 }
 
 export interface T {
-  lang:     Lang
-  nav:      NavT
-  hero:     HeroT
-  about:    AboutT
-  skills:   SkillsT
-  projects: ProjectsT
-  contact:  ContactT
-  footer:   FooterT
+  lang:       Lang
+  nav:        NavT
+  hero:       HeroT
+  about:      AboutT
+  skills:     SkillsT
+  experience: ExperienceT
+  projects:   ProjectsT
+  contact:    ContactT
+  footer:     FooterT
 }
