@@ -2,10 +2,64 @@
 import type { Lang } from '../i18n/types'
 
 interface Props {
-  title?: string
-  lang?: Lang
+  title?:       string
+  description?: string
+  lang?:        Lang
 }
-const { title = 'Valerio Pinsone — Portfolio', lang = 'en' } = Astro.props
+
+// Update SITE_URL once deployed
+const SITE_URL = 'https://valeriopinsone.dev'
+
+const { title, description, lang = 'en' } = Astro.props
+
+const titles: Record<Lang, string> = {
+  en: 'Valerio Pinsone — Frontend Developer | Angular, React & Astro',
+  it: 'Valerio Pinsone — Frontend Developer | Sviluppo Web & Applicazioni',
+}
+
+const descriptions: Record<Lang, string> = {
+  en: 'Frontend Developer based in Rome, Italy. Expert in Angular, React and Astro. 7+ years building scalable web applications, modern UIs and enterprise solutions. Available for new projects.',
+  it: 'Frontend Developer con sede a Roma. Specializzato in Angular, React e Astro. 7+ anni di esperienza nello sviluppo di siti web, applicazioni web e interfacce moderne. Disponibile per nuovi progetti.',
+}
+
+const keywords: Record<Lang, string> = {
+  en: 'Valerio Pinsone, Frontend Developer, Web Developer, Angular Developer, React Developer, Astro, TypeScript, JavaScript, Web Applications, UI Developer, Software Engineer, Rome Italy, Portfolio, Next.js',
+  it: 'Valerio Pinsone, Frontend Developer, Sviluppatore Frontend, Sviluppo Siti Web, Applicazioni Web, Angular, React, Astro, TypeScript, JavaScript, Sviluppatore Web Roma, Portfolio, Next.js, Sviluppo Software',
+}
+
+const resolvedTitle = title ?? titles[lang]
+const resolvedDesc  = description ?? descriptions[lang]
+const canonicalUrl  = lang === 'en' ? SITE_URL : `${SITE_URL}/it`
+const alternateEn   = SITE_URL
+const alternateIt   = `${SITE_URL}/it`
+const ogLocale      = lang === 'en' ? 'en_US' : 'it_IT'
+const ogLocaleAlt   = lang === 'en' ? 'it_IT' : 'en_US'
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Valerio Pinsone',
+  jobTitle: 'Frontend Developer',
+  description: descriptions.en,
+  email: 'valerio.pinsone@gmail.com',
+  url: SITE_URL,
+  sameAs: [
+    'https://www.linkedin.com/in/valeriopinsone/',
+    'https://github.com/valeriopinsone',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rome',
+    addressRegion: 'Lazio',
+    addressCountry: 'IT',
+  },
+  knowsLanguage: ['Italian', 'English'],
+  knowsAbout: [
+    'Angular', 'React', 'Astro', 'Next.js', 'TypeScript', 'JavaScript',
+    'Frontend Development', 'Web Development', 'Web Applications',
+    'Tailwind CSS', 'UI Design',
+  ],
+})
 ---
 
 <!doctype html>
@@ -13,10 +67,47 @@ const { title = 'Valerio Pinsone — Portfolio', lang = 'en' } = Astro.props
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio di Valerio Pinsone, Frontend Developer." />
+
+    <!-- Primary SEO -->
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDesc} />
+    <meta name="keywords"    content={keywords[lang]} />
+    <meta name="author"      content="Valerio Pinsone" />
+    <meta name="robots"      content="index, follow" />
+    <meta name="theme-color" content="#09090b" />
+    <link rel="canonical"    href={canonicalUrl} />
+
+    <!-- hreflang for bilingual indexing -->
+    <link rel="alternate" hreflang="en"       href={alternateEn} />
+    <link rel="alternate" hreflang="it"       href={alternateIt} />
+    <link rel="alternate" hreflang="x-default" href={alternateEn} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"              content="profile" />
+    <meta property="og:title"             content={resolvedTitle} />
+    <meta property="og:description"       content={resolvedDesc} />
+    <meta property="og:url"               content={canonicalUrl} />
+    <meta property="og:site_name"         content="Valerio Pinsone — Portfolio" />
+    <meta property="og:locale"            content={ogLocale} />
+    <meta property="og:locale:alternate"  content={ogLocaleAlt} />
+    <meta property="profile:first_name"   content="Valerio" />
+    <meta property="profile:last_name"    content="Pinsone" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDesc} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={jsonLd} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
